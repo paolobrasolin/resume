@@ -136,12 +136,6 @@ after=\end{multicols}}
         inner sep=0,
       ] at (0.5\pdfpagewidth+0.5\Pad+0.5\Col,\pdfpageheight-\Pad-.5\Row)
       {\resizebox{4.6in}{!}{\MakeUppercase{Paolo \ Brasolin}}};
-    \begin{scope}[shift={(.5\Col+\Pad,\pdfpageheight-.5\Col+\Pad-\Pad)}]
-      \clip circle (.5\Col-\Pad);
-      \fill [white] circle (\Col);
-      \node[shift={(.04in,-.075in)},scale=1.1]{\includegraphics[width=\dimexpr\Col-2\Pad\relax]
-        {photo--placeholder.jpg}};
-    \end{scope}
   \end{tikzpicture}}
 
 \usepackage[
