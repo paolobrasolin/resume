@@ -75,9 +75,15 @@ after=\end{multicols}}
 \endgroup
 }
 
+\NewDocumentCommand{\Keyword}{m}{{\color{Accent}\bfseries#1}}
+
+\NewDocumentCommand{\SimpleEvent}{mmom}
+  {%
+{\bfseries#1}\hfill#2\IfValueT{#3}{\textcolor{Muted}{, #3}}\quad#4\vspace{-3pt}}
+
 \NewDocumentCommand{\Event}{mmom}
   {\vspace{3pt}%\smallskip
-{\bfseries#1}\hfill#2\IfValueT{#3}{\textcolor{HBar}{, #3}}\quad#4\vspace{-3pt}}
+{\bfseries#1}\hfill#2\IfValueT{#3}{\textcolor{Muted}{, #3}}\quad#4\vspace{-3pt}}
 
 \NewDocumentCommand{\Rank}{mO{5}}{%
   \newcount\N
@@ -115,8 +121,11 @@ after=\end{multicols}}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
 
-\colorlet{HBar}{gray}%{violet!15!white}
-\colorlet{VBar}{black}%{violet!50!black}
+\definecolor{Base}{HTML}{3D1362}
+\colorlet{HBar}{violet}
+\colorlet{VBar}{black}
+\colorlet{Accent}{violet}
+\colorlet{Muted}{gray}
 
 \AddToShipoutPictureBG{%
   \begin{tikzpicture}[remember picture,overlay]
