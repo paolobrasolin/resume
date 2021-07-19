@@ -7,9 +7,9 @@
 
 \usepackage[default]{lato}
 
-\newlength{\Pad}\setlength{\Pad}{0.2in}
-\newlength{\Row}\setlength{\Row}{1.3in}
-\newlength{\Col}\setlength{\Col}{2.1in}
+\newlength{\Pad}\setlength{\Pad}{14.562pt} % 1.618 * 9pt
+\newlength{\Row}\setlength{\Row}{1.25in}
+\newlength{\Col}\setlength{\Col}{\dimexpr 1.618\Row\relax}
 
 \usepackage{geometry}
 \geometry{
@@ -148,14 +148,14 @@ after=\end{multicols}}
   \begin{tikzpicture}[remember picture,overlay]
     \node [
         % draw, white,
-        anchor=south west,
-        % draw,
+        anchor=north west,
         inner sep=0,
         text=white,
         text width=\Col-2\Pad,
-      ] at (2\Pad,8\Pad)
+        minimum height=\Row-2\Pad,
+      ] at (2\Pad,\pdfpageheight-2\Pad)
       {
-        \SideSection{Contacts}
+        % \SideSection{Contacts}
         %
         paolobrasolin@gmail.com
         \hfill\href{mailto:paolobrasolin@gmail.com}{\Fa{Envelope}}\par\smallskip
@@ -171,8 +171,20 @@ after=\end{multicols}}
         \hfill\Fa{Phone}\par\smallskip
         Padua, IT, Italy
         \hfill\Fa{Home}\\
-        %
-        \bigskip
+      };
+  \end{tikzpicture}}
+
+\AddToShipoutPictureFG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node [
+        % draw, white,
+        anchor=north west,
+        inner sep=0,
+        text=white,
+        text width=\Col-2\Pad,
+        % minimum height=\pdfpageheight-\Row-5\Pad,
+      ] at (2\Pad,\pdfpageheight-3\Pad-\Row-1.5pt) % NOTE: 1.5pt is for vertical alignment with first header
+      {
         \SideSection{Languages}
         \Ranked{Italian}{5}
         \Ranked{English}{4}
