@@ -79,11 +79,11 @@ after=\end{multicols}}
 
 \NewDocumentCommand{\SimpleEvent}{mmom}
   {%
-{\bfseries#1}\hfill#2\IfValueT{#3}{\textcolor{Muted}{, #3}}\quad#4\vspace{-3pt}}
+{\bfseries#1}\hfill#2\IfValueT{#3}{\emph{, #3}}\quad#4\vspace{-3pt}}
 
 \NewDocumentCommand{\Event}{mmom}
   {\vspace{3pt}%\smallskip
-{\bfseries#1}\hfill#2\IfValueT{#3}{\textcolor{Muted}{, #3}}\quad#4\vspace{-3pt}}
+{\bfseries#1}\hfill#2\IfValueT{#3}{\emph{, #3}}\quad#4\vspace{-3pt}}
 
 \NewDocumentCommand{\Rank}{mO{5}}{%
   \newcount\N
@@ -121,11 +121,11 @@ after=\end{multicols}}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
 
-\definecolor{Base}{HTML}{3D1362}
-\colorlet{HBar}{violet}
+% \definecolor{Base}{HTML}{3D1362} % {Hsb}{272,0.81,0.38}
 \colorlet{VBar}{black}
-\colorlet{Accent}{violet}
-\colorlet{Muted}{gray}
+\definecolor{HBar}{Hsb}{272,0.8,0.6}
+\definecolor{Accent}{Hsb}{272,0.8,0.7}
+\definecolor{Muted}{Hsb}{0,0,0.5}
 
 \AddToShipoutPictureBG{%
   \begin{tikzpicture}[remember picture,overlay]
@@ -313,21 +313,21 @@ I learned the importance of carefully \textbf{tailoring communication}.
 
 \SimpleEvent
   {\href{https://www.credly.com/badges/37aaaf27-3a2e-436d-9195-db4f46eb222e/public_url}
-  {\llap{\textsuperscript{\tiny\color{HBar}\Fa{Link}}}%
+  {\llap{\textsuperscript{\tiny\color{Muted}\Fa{Link}}}%
    AWS Certified Solutions Architect -- Professional}}
   {AWS Training and Certification}
   {May 2021}
 
 \SimpleEvent
   {\href{https://www.credly.com/badges/d092afab-f194-4074-ade6-78728c854faa/public_url}
-  {\llap{\textsuperscript{\tiny\color{HBar}\Fa{Link}}}%
+  {\llap{\textsuperscript{\tiny\color{Muted}\Fa{Link}}}%
    AWS Certified Solutions Architect -- Associate}}
   {AWS Training and Certification}
   {Jan 2020}
 
 \SimpleEvent
   {\href{https://www.credly.com/badges/d268e963-65ba-462b-a835-f65a7baccccd/public_url}
-  {\llap{\textsuperscript{\tiny\color{HBar}\Fa{Link}}}%
+  {\llap{\textsuperscript{\tiny\color{Muted}\Fa{Link}}}%
    AWS Certified Cloud Practitioner}}
   {AWS Training and Certification}
   {Nov 2019}
