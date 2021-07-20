@@ -15,8 +15,8 @@
 \geometry{
   a4paper,
   % letterpaper,
-  top=\dimexpr\Row+3\Pad\relax,
-  left=\dimexpr\Col+3\Pad\relax,
+  top=\dimexpr\Row+\Pad+1.618\Pad\relax,
+  left=\dimexpr\Pad+\Col+1.618\Pad\relax,
   right=\dimexpr2\Pad\relax,
   bottom=\dimexpr2\Pad\relax,
   % showframe
@@ -143,8 +143,8 @@ after=\end{multicols}}
         font=\fontseries{l}\selectfont\lsstyle,
         color=white,
         inner sep=0,
-      ] at (0.5\pdfpagewidth+0.5\Pad+0.5\Col,\pdfpageheight-\Pad-.5\Row)
-      {\resizebox{4.6in}{!}{\MakeUppercase{Paolo \ Brasolin}}};
+      ] at (\Pad+\Col+1.618\Pad+0.5\textwidth,\pdfpageheight-\Pad-.5\Row)
+      {\resizebox{!}{0.25\Row}{PAOLO \ BRASOLIN}};
   \end{tikzpicture}}
 
 \usepackage[
@@ -192,7 +192,7 @@ after=\end{multicols}}
         text=white,
         text width=\Col-2\Pad,
         % minimum height=\pdfpageheight-\Row-5\Pad,
-      ] at (2\Pad,\pdfpageheight-3\Pad-\Row-1.5pt) % NOTE: 1.5pt is for vertical alignment with first header
+      ] at (2\Pad,\pdfpageheight-\Pad-\Row-1.618\Pad-1.5pt) % NOTE: 1.5pt is for vertical alignment with first header
       {
         \SideSection{Languages}
         \Ranked{Italian}{5}
