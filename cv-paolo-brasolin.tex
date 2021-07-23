@@ -132,6 +132,7 @@
 \definecolor{HBar}{Hsb}{272,0.8,0.6}
 \definecolor{Accent}{Hsb}{272,0.8,0.7}
 \definecolor{Muted}{Hsb}{0,0,0.5}
+\definecolor{Invisible}{RGB}{1,1,1}
 
 %===[ DRAWING TOOLS ]===========================================================
 
@@ -139,6 +140,7 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
+\usetikzlibrary{shapes.geometric}
 
 %===[ SIDEBAR ]=================================================================
 
@@ -241,6 +243,19 @@
         Graphemics and phonetics.\\
         Music and DIY.\par
       };
+  \end{tikzpicture}}
+
+\AddToShipoutPictureFG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node [ 
+      fill=Invisible,
+      regular polygon,
+      regular polygon sides=5,
+      rotate=180,
+      minimum size=0.618\Col,
+      inner sep=0,
+    ] at (\Pad+0.5\Col,0.5\Col)
+    {\includegraphics[angle=180,width=0.236\Col]{glyph.mps}};
   \end{tikzpicture}}
 
 %===[ MAIN CONTENT ]============================================================
