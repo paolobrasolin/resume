@@ -7,21 +7,6 @@
 
 \usepackage[default]{lato}
 
-\newlength{\Pad}\setlength{\Pad}{14.562pt} % 1.618 * 9pt
-\newlength{\Row}\setlength{\Row}{1.25in}
-\newlength{\Col}\setlength{\Col}{\dimexpr 1.618\Row\relax}
-
-\usepackage{geometry}
-\geometry{
-  a4paper,
-  % letterpaper,
-  top=\dimexpr\Row+\Pad+1.618\Pad\relax,
-  left=\dimexpr\Pad+\Col+1.618\Pad\relax,
-  right=\dimexpr2\Pad\relax,
-  bottom=\dimexpr2\Pad\relax,
-  % showframe
-}
-
 \usepackage{csquotes}
 
 \usepackage{parskip}
@@ -121,6 +106,29 @@ after=\end{multicols}}
 \NewDocumentCommand{\SideSection}{m}
   {\SectionStrut{\SideSectionFont#1\quad\hrulefill}\par\smallskip}
 
+%===[ PAGE GEOMETRY ]===========================================================
+
+\usepackage[
+  letterspace=90
+]{microtype}
+
+\newlength{\Pad}\setlength{\Pad}{14.562pt} % 1.618 * 9pt
+\newlength{\Row}\setlength{\Row}{1.25in}
+\newlength{\Col}\setlength{\Col}{\dimexpr 1.618\Row\relax}
+\newlength{\SectionStrutHeight}
+\settoheight{\SectionStrutHeight}{\hbox{\SectionStrut}}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  % letterpaper,
+  top=\dimexpr\Row+\Pad+1.618\Pad-\SectionStrutHeight\relax,
+  left=\dimexpr\Pad+\Col+1.618\Pad\relax,
+  right=\dimexpr2\Pad\relax,
+  bottom=\dimexpr2\Pad\relax,
+  % showframe
+}
+
 %===[ DRAWING TOOLS ]===========================================================
 
 \usepackage{xcolor}
@@ -154,10 +162,6 @@ after=\end{multicols}}
       ] at (\Pad+\Col+1.618\Pad+0.5\textwidth,\pdfpageheight-\Pad-.5\Row)
       {\resizebox{!}{0.25\Row}{PAOLO \ BRASOLIN}};
   \end{tikzpicture}}
-
-\usepackage[
-  letterspace=90
-]{microtype}
 
 \usepackage{lipsum}
 
@@ -200,7 +204,7 @@ after=\end{multicols}}
         text=white,
         text width=\Col-2\Pad,
         % minimum height=\pdfpageheight-\Row-5\Pad,
-      ] at (2\Pad,\pdfpageheight-\Pad-\Row-1.618\Pad)
+      ] at (2\Pad,\pdfpageheight-\Pad-\Row-1.618\Pad+\SectionStrutHeight)
       {
         \SideSection{Languages}
         \Ranked{Italian}{5}
