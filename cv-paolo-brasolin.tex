@@ -63,12 +63,20 @@ after=\end{multicols}}
 \usepackage{xparse}
 % \usepackage{etoolbox}
 
+\NewDocumentCommand{\SectionFont}{}
+  {\large\scshape\lsstyle}
+
+\NewDocumentCommand{\SideSectionFont}{}
+  {\large\scshape}
+
+\NewDocumentCommand{\SectionStrut}{}
+  {\begingroup\SectionFont\strut\endgroup}
+  
 \NewDocumentCommand{\Section}{m}{
 \medskip
+\SectionStrut
 \begingroup
-% \fontseries{l}
-\large\scshape
-\lsstyle
+\SectionFont
 \hrulefill\quad
 \MakeUppercase{#1}
 \quad\hrulefill
@@ -111,7 +119,7 @@ after=\end{multicols}}
   {\hbox to 1em{\hfill\resizebox{1em}{!}{\csname fa#1\endcsname}\hfill}}
 
 \NewDocumentCommand{\SideSection}{m}
-  {{\scshape\large#1\quad\hrulefill}\par\smallskip}
+  {\SectionStrut{\SideSectionFont#1\quad\hrulefill}\par\smallskip}
 
 %===[ DRAWING TOOLS ]===========================================================
 
@@ -192,7 +200,7 @@ after=\end{multicols}}
         text=white,
         text width=\Col-2\Pad,
         % minimum height=\pdfpageheight-\Row-5\Pad,
-      ] at (2\Pad,\pdfpageheight-\Pad-\Row-1.618\Pad-1.5pt) % NOTE: 1.5pt is for vertical alignment with first header
+      ] at (2\Pad,\pdfpageheight-\Pad-\Row-1.618\Pad)
       {
         \SideSection{Languages}
         \Ranked{Italian}{5}
