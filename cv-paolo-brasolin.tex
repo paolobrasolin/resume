@@ -17,36 +17,24 @@
 \usepackage[hidelinks]{hyperref}
 \urlstyle{sf}
 
-%===[ TYPESETTING ]=============================================================
-
 \usepackage{cancel}
 
-\usepackage{multicol}
-
-\setlength{\multicolsep}{0pt}
+% \usepackage{multicol}
+% \setlength{\multicolsep}{0pt}
 
 \usepackage{enumitem}
 
-\SetEnumitemKey{twocol}{
-% itemsep=1\itemsep,
-% parsep=1\parsep,
-before=\vspace{\parskip}\raggedcolumns\begin{multicols}{2},
-after=\end{multicols}}
+% \SetEnumitemKey{twocol}{
+% % itemsep=1\itemsep,
+% % parsep=1\parsep,
+% before=\vspace{\parskip}\raggedcolumns\begin{multicols}{2},
+% after=\end{multicols}}
 
 \setlist[itemize]{nosep,wide,leftmargin=1em,labelwidth=1em,labelsep=0pt}
 
-
-
-
-
-
-
-
-
-%===[ MACRO TRICKERY ]==========================================================
+%===[ CUSTOM MACROS ]===========================================================
 
 \usepackage{xparse}
-% \usepackage{etoolbox}
 
 \NewDocumentCommand{\SectionFont}{}
   {\large\scshape\lsstyle}
@@ -108,13 +96,15 @@ after=\end{multicols}}
 
 %===[ PAGE GEOMETRY ]===========================================================
 
+% NOTE: cannot be at bottom of preamble because we need \lsstyle for \SectionStrutHeight
 \usepackage[
   letterspace=90
 ]{microtype}
 
-\newlength{\Pad}\setlength{\Pad}{14.562pt} % 1.618 * 9pt
+\def\Phi{1.618}
+\newlength{\Pad}\setlength{\Pad}{14.562pt} % \Phi * 9pt
 \newlength{\Row}\setlength{\Row}{1.25in}
-\newlength{\Col}\setlength{\Col}{\dimexpr 1.618\Row\relax}
+\newlength{\Col}\setlength{\Col}{\dimexpr\Phi\Row\relax}
 \newlength{\SectionStrutHeight}
 \settoheight{\SectionStrutHeight}{\hbox{\SectionStrut}}
 
@@ -122,26 +112,30 @@ after=\end{multicols}}
 \geometry{
   a4paper,
   % letterpaper,
-  top=\dimexpr\Row+\Pad+1.618\Pad-\SectionStrutHeight\relax,
-  left=\dimexpr\Pad+\Col+1.618\Pad\relax,
-  right=\dimexpr2\Pad\relax,
-  bottom=\dimexpr2\Pad\relax,
+  top=\dimexpr\Row+\Pad+\Phi\Pad-\SectionStrutHeight\relax,
+  left=\dimexpr\Pad+\Col+\Phi\Pad\relax,
+  right=\dimexpr\Phi\Pad\relax,
+  bottom=\dimexpr\Phi\Pad\relax,
   % showframe
 }
 
-%===[ DRAWING TOOLS ]===========================================================
+%===[ COLORS ]==================================================================
 
 \usepackage{xcolor}
+
+\colorlet{VBar}{black}
+\definecolor{HBar}{Hsb}{272,0.8,0.6}
+\definecolor{Accent}{Hsb}{272,0.8,0.7}
+\definecolor{Muted}{Hsb}{0,0,0.5}
+
+%===[ DRAWING TOOLS ]===========================================================
+
 \usepackage{eso-pic}
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
 
-% \definecolor{Base}{HTML}{3D1362} % {Hsb}{272,0.81,0.38}
-\colorlet{VBar}{black}
-\definecolor{HBar}{Hsb}{272,0.8,0.6}
-\definecolor{Accent}{Hsb}{272,0.8,0.7}
-\definecolor{Muted}{Hsb}{0,0,0.5}
+%===[ SIDEBAR ]=================================================================
 
 \AddToShipoutPictureBG{%
   \begin{tikzpicture}[remember picture,overlay]
@@ -159,11 +153,9 @@ after=\end{multicols}}
         font=\fontseries{l}\selectfont\lsstyle,
         color=white,
         inner sep=0,
-      ] at (\Pad+\Col+1.618\Pad+0.5\textwidth,\pdfpageheight-\Pad-.5\Row)
+      ] at (\Pad+\Col+\Phi\Pad+0.5\textwidth,\pdfpageheight-\Pad-.5\Row)
       {\resizebox{!}{0.25\Row}{PAOLO \ BRASOLIN}};
   \end{tikzpicture}}
-
-\usepackage{lipsum}
 
 \AddToShipoutPictureFG{%
   \begin{tikzpicture}[remember picture,overlay]
@@ -204,7 +196,7 @@ after=\end{multicols}}
         text=white,
         text width=\Col-2\Pad,
         % minimum height=\pdfpageheight-\Row-5\Pad,
-      ] at (2\Pad,\pdfpageheight-\Pad-\Row-1.618\Pad+\SectionStrutHeight)
+      ] at (2\Pad,\pdfpageheight-\Pad-\Row-\Phi\Pad+\SectionStrutHeight)
       {
         \SideSection{Languages}
         \Ranked{Italian}{5}
@@ -243,11 +235,9 @@ after=\end{multicols}}
       };
   \end{tikzpicture}}
 
-
+%===[ MAIN CONTENT ]============================================================
 
 % NOTA: prima quello che offro, poi quello che cerco.
-
-
 
 \begin{document}
 
