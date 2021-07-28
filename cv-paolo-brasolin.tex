@@ -1,7 +1,7 @@
 \documentclass[9pt]{scrartcl}
 
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
+\usepackage[english, russian]{babel}
 
 \pagestyle{empty}
 
@@ -132,6 +132,7 @@
 \definecolor{HBar}{Hsb}{272,0.8,0.6}
 \definecolor{Accent}{Hsb}{272,0.8,0.7}
 \definecolor{Muted}{Hsb}{0,0,0.5}
+\definecolor{InverseMuted}{Hsb}{0,0,0.6}
 
 %===[ DRAWING TOOLS ]===========================================================
 
@@ -139,6 +140,28 @@
 \usepackage{tikz}
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
+
+% Ꙩ which we implement as...
+\NewDocumentCommand{\MonocularO}{}{%
+  о\llap{\raisebox{.20em}{.}\kern.165em}%
+}
+
+% ꙮ which we implement as...
+\NewDocumentCommand{\MultiocularO}{}{%
+  \resizebox{!}{1ex}{%
+    \raisebox{.4em}{\MonocularO}\kern-.36em%
+    \raisebox{.8em}{\MonocularO}%
+    \llap{\MonocularO}\kern-.36em%
+    \raisebox{.4em}{\MonocularO}\kern-.36em%
+    \raisebox{.8em}{\MonocularO}%
+    \llap{\MonocularO}\kern-.36em%
+    \raisebox{.4em}{\MonocularO}%
+  }%
+}
+
+\NewDocumentCommand{\Mnogootex}{}{%
+  Много\MultiocularO тех%
+}
 
 %===[ SIDEBAR ]=================================================================
 
@@ -228,12 +251,39 @@
 
         \SideSection{Projects}
 
-        \color{white}
-        \begin{itemize}
-          \item {\ttfamily coDi}: \hologo{TeX} package, DSL for drawing commutative diagrams \emph{done right}
-          \item {\ttfamily jekyll-antex}: Ruby gem, HQ static typography for the web leveraging \hologo{TeX}
-          \item \textls[-30]{\ttfamily asciidoctor-bibliography}: Ruby gem, Asciidoctor extension allowing usage of \hologo{BibTeX} databases 
-        \end{itemize}
+        \href{https://github.com/paolobrasolin/commutative-diagrams}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily coDi}}:
+        \hologo{TeX} DSL for drawing commutative diagrams which is both sensible and humane
+
+        \medskip
+
+        \href{https://github.com/paolobrasolin/mnogootex}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\Mnogootex}}:
+        parallel multi-class \hologo{TeX} compiler to face many publishers all at once
+
+        \medskip
+
+        \href{https://github.com/paolobrasolin/jekyll-antex}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily jekyll-antex}}:
+        Jekyll plugin leveraging \hologo{TeX} for HQ static typography on the web
+
+        \medskip
+
+        \href{https://github.com/paolobrasolin/foil}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily foil}}:
+        decouples annotations from PDFs to version them and collaborate with peers
+
+        \medskip
+
+        \href{https://github.com/paolobrasolin/bab-dub}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily bab-dub}}:
+        interactive CLI butler to tidy your babel of PDFs via parsing and OCR
+
+        \medskip
+
+        \href{https://github.com/riboseinc/asciidoctor-bibliography}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily asciidoctor-bibliography}}:
+        Asciidoctor extension which allows the usage of \hologo{BibTeX} databases and CSL styles
 
         \SideSection{Interests}
 
