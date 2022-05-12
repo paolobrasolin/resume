@@ -3,7 +3,7 @@
   DIV=calc,
   parskip=half,
 ]{scrartcl}
-\linespread{1.15}
+% \linespread{1.2}
 \pagestyle{empty}
 
 \usepackage[T2A,T1]{fontenc} % for cyrillic
@@ -125,8 +125,8 @@
 
 \def\Phi{1.618}
 \newlength{\Pad}\setlength{\Pad}{14.562pt} % \Phi * 9pt
-\newlength{\Row}\setlength{\Row}{1.25in}
-\newlength{\Col}\setlength{\Col}{\dimexpr\Phi\Row\relax}
+\newlength{\Row}\setlength{\Row}{1.00in}
+\newlength{\Col}\setlength{\Col}{2.00in}
 \newlength{\SectionStrutHeight}
 \settoheight{\SectionStrutHeight}{\hbox{\SectionStrut}}
 
@@ -206,27 +206,28 @@
   \begin{tikzpicture}[remember picture,overlay]
     \node [
         % draw, white,
-        anchor=north west,
+        anchor=west,
         inner sep=0,
         text=white,
         text width=\Col-2\Pad,
         minimum height=\Row-2\Pad,
-      ] at (2\Pad,\pdfpageheight-2\Pad)
+      ] at (2\Pad,\pdfpageheight-\Pad-0.5\Row)
       {
-        paolobrasolin@gmail.com
+        \strut paolobrasolin@gmail.com
         \hfill\href{mailto:paolobrasolin@gmail.com}{\Fa{Envelope}}\par\smallskip
         %
-        paolobrasolin
+        \strut paolobrasolin
         \hfill
         \,\href{https://www.linkedin.com/in/paolobrasolin/}{\Fa{Linkedin}}
         \,\href{https://github.com/paolobrasolin/}{\Fa{Github}}
         \,\href{https://twitter.com/paolobrasolin}{\Fa{Twitter}}
         \par\smallskip
         %
-        (+39)\ 347\ 6769233
-        \hfill\Fa{Phone}\par\smallskip
-        Padua, IT, Italy
-        \hfill\Fa{Home}\\
+        \strut (+39)\ 347\ 6769233
+        \hfill\Fa{Phone}
+        % \par\smallskip
+        % \strut Padua, IT, Italy
+        % \hfill\Fa{Home}\\
       };
   \end{tikzpicture}}
 
@@ -246,6 +247,7 @@
         \Ranked{Italian}{5} % TODO: C2
         \Ranked{English}{4} % TODO: C2
         \Ranked{French}{2} % TODO: C1
+        \Ranked*{German}{0} % TODO: C1
 
         \smallskip
 
@@ -253,7 +255,7 @@
 
         \Ranked{Ruby and RoR}{5}
         \Ranked{\hologo{TeX}}{5}
-        \Ranked{JavaScript}{4}
+        \Ranked{JavaScript and TS}{4}
         \Ranked{HTML/CSS}{4}
         % \Ranked{Docker}{3}
         \Ranked{Python}{3}
@@ -277,6 +279,12 @@
         \href{https://github.com/paolobrasolin/commutative-diagrams}%
         {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily coDi}}:
         \hologo{TeX} DSL for drawing commutative diagrams which is both sensible and humane
+
+        \medskip
+
+        \href{https://github.com/paolobrasolin/fletcher}%
+        {\llap{\textsuperscript{\tiny\color{InverseMuted}\Fa{Link}}}{\ttfamily fletcher}}:
+        universal DSL transpiler for commutative diagrams drawn with \hologo{TeX}
 
         \medskip
 
@@ -312,10 +320,12 @@
 
         \SideSection{Interests}
 
+        Falconry\\
         Category theory\\
-        Combinatorics\\
+        Linguistics\\
+        % Combinatorics\\
         Typography\\
-        Graphemics and phonetics\\
+        % Graphemics and phonetics\\
         Music and DIY\par
       };
   \end{tikzpicture}}
@@ -343,9 +353,26 @@ product brings to its users. In short, I am seeking a \Keyword{mission}.
 \Section{Experience}
 
 \Event
+  {Co-founder, CTO}
+  {AudioGiro S.r.l.}[Padua (IT)]
+  {Mar 2022 -- \textbf{now}}
+
+I hold the technical leadership of the company.
+Our goal is turning tourists into explorers.
+
+\Event
+  {Researcher}
+  {Eurac Research}[Bolzano (IT)]
+  {Feb 2022 -- \textbf{now}}
+
+I work in the Language Technologies group at the Institute for Applied Linguistics.
+I'm appointed to the Zeit.Shift project, co-funded by EU through Interreg, for designing and developing a ludic citizen science project.
+I'm also overseeing the modernization of the institute's k8s cluster.
+
+\Event
   {Lead Developer}
   {Leanbit S.r.l.}[Padua (IT), remote]
-  {Jan 2019 -- \textbf{now}}
+  {Jan 2019 -- Oct 2022}
 
 I honed my \Keyword{management} skills through both experience and coaching. In
 turn, I mentored and paired with new talents as our \Keyword{Agile} principled company
