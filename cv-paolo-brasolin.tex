@@ -1,16 +1,18 @@
-\documentclass[9pt]{scrartcl}
+\documentclass[
+  fontsize=9pt,
+  DIV=calc,
+  parskip=half,
+]{scrartcl}
+\linespread{1.15}
+\pagestyle{empty}
 
+\usepackage[T2A,T1]{fontenc} % for cyrillic
 \usepackage[utf8]{inputenc}
 \usepackage[english, russian]{babel}
-
-\pagestyle{empty}
 
 \usepackage[default]{lato}
 
 \usepackage{csquotes}
-
-\usepackage{parskip}
-\linespread{1.2}
 
 \usepackage{fontawesome}
 \usepackage{hologo}
@@ -38,22 +40,25 @@
 \usepackage{xparse}
 
 \NewDocumentCommand{\SectionFont}{}
-  {\large\scshape\lsstyle}
+  {\large
+  %\scshape
+  \lsstyle}
 
 \NewDocumentCommand{\SectionStrut}{}
   {\begingroup\SectionFont\strut\endgroup}
   
-\NewDocumentCommand{\Section}{m}{
-\medskip
-\SectionStrut
-% \llap{\smash{\rule[-\Pad]{1pt}{\dimexpr\Phi\Pad+\Pad\relax}}}%
-\begingroup
-\SectionFont
-\hrulefill\quad
-\MakeUppercase{#1}%
-\quad\hrulefill
-\endgroup
-% no skip after
+\NewDocumentCommand{\Section}{m}{%
+  \medskip
+  \begingroup
+  \parfillskip0pt%
+  \parbox{\linewidth}{%
+    \SectionStrut
+    \hrulefill\quad
+    \SectionFont
+    \MakeUppercase{#1}%
+    \quad\hrulefill
+  }%
+  \endgroup
 }
 
 \NewDocumentCommand{\SideSection}{sm}{%
@@ -71,8 +76,18 @@
 
 \NewDocumentCommand{\Keyword}{m}{{\color{Accent}\bfseries#1}}
 
-\NewDocumentCommand{\Event}{mmom}
-  {{\bfseries#1}\hfill#2\IfValueT{#3}{\emph{, #3}}\quad#4}
+\NewDocumentCommand{\Event}{mmom}{%
+  \begingroup
+  \parfillskip0pt%
+  \parbox{\linewidth}{%
+    {\bfseries#1}%
+    \hfill
+    #2\IfValueT{#3}{\emph{, #3}}%
+    \quad
+    #4%
+  }%
+  \endgroup
+}
 
 \NewDocumentCommand{\Rank}{mO{5}}{%
   \newcount\N
@@ -428,19 +443,19 @@ the subjects and overcome their hurdles. I learned the importance of carefully
   {Jan 2020 -- Jun 2021}\\
 \Event
   {\href{https://www.credly.com/badges/37aaaf27-3a2e-436d-9195-db4f46eb222e/public_url}
-  {\llap{\textsuperscript{\tiny\color{Muted}\Fa{Link}}}%
+  {\llap{\textsuperscript{\mdseries\tiny\color{Muted}\Fa{Link}}}%
    AWS Certified Solutions Architect -- Professional}}
   {AWS Training and Certification}
   {May 2021}\\
 \Event
   {\href{https://www.credly.com/badges/d092afab-f194-4074-ade6-78728c854faa/public_url}
-  {\llap{\textsuperscript{\tiny\color{Muted}\Fa{Link}}}%
+  {\llap{\textsuperscript{\mdseries\tiny\color{Muted}\Fa{Link}}}%
    AWS Certified Solutions Architect -- Associate}}
   {AWS Training and Certification}
   {Jan 2020}\\
 \Event
   {\href{https://www.credly.com/badges/d268e963-65ba-462b-a835-f65a7baccccd/public_url}
-  {\llap{\textsuperscript{\tiny\color{Muted}\Fa{Link}}}%
+  {\llap{\textsuperscript{\mdseries\tiny\color{Muted}\Fa{Link}}}%
    AWS Certified Cloud Practitioner}}
   {AWS Training and Certification}
   {Nov 2019}\\
