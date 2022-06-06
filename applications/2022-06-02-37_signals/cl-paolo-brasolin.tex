@@ -1,0 +1,230 @@
+\documentclass[
+  fontsize=12pt,
+  DIV=calc,
+  parskip=half,
+]{scrartcl}
+% \linespread{1.2}
+\pagestyle{empty}
+
+\usepackage[T2A,T1]{fontenc} % for cyrillic
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\usepackage[default]{lato}
+
+\usepackage{csquotes}
+
+\usepackage{fontawesome}
+\usepackage{hologo}
+
+\usepackage[hidelinks]{hyperref}
+\urlstyle{sf}
+
+\usepackage{cancel}
+
+% \usepackage{multicol}
+% \setlength{\multicolsep}{0pt}
+
+\usepackage{enumitem}
+
+% \SetEnumitemKey{twocol}{
+% % itemsep=1\itemsep,
+% % parsep=1\parsep,
+% before=\vspace{\parskip}\raggedcolumns\begin{multicols}{2},
+% after=\end{multicols}}
+
+\setlist[itemize]{nosep,wide,leftmargin=1em,labelwidth=1em,labelsep=0pt}
+
+%===[ CUSTOM MACROS ]===========================================================
+
+\usepackage{xparse}
+
+\NewDocumentCommand{\SectionFont}{}
+  {\large
+  %\scshape
+  \lsstyle}
+
+\NewDocumentCommand{\SectionStrut}{}
+  {\begingroup\SectionFont\strut\endgroup}
+  
+\NewDocumentCommand{\Section}{m}{%
+  \medskip
+  \begingroup
+  \parfillskip0pt%
+  \parbox{\linewidth}{%
+    \SectionStrut
+    \hrulefill\quad
+    \SectionFont
+    \MakeUppercase{#1}%
+    \quad\hrulefill
+  }%
+  \endgroup
+}
+
+\NewDocumentCommand{\SideSection}{sm}{%
+\IfBooleanF{#1}{\bigskip}%
+\SectionStrut
+% \llap{\smash{\rule[-\Pad]{1pt}{\dimexpr\Phi\Pad+\Pad\relax}}}%
+\begingroup
+\SectionFont
+% no line before
+\MakeUppercase{#2}%
+\quad\hrulefill
+\endgroup
+\medskip
+}
+
+\NewDocumentCommand{\Keyword}{m}{{\color{Accent}\bfseries#1}}
+
+\NewDocumentCommand{\Event}{mmom}{%
+  \begingroup
+  \parfillskip0pt%
+  \parbox{\linewidth}{%
+    {\bfseries#1}%
+    \hfill
+    #2\IfValueT{#3}{\emph{, #3}}%
+    \quad
+    #4%
+  }%
+  \endgroup
+}
+
+\NewDocumentCommand{\Rank}{mO{5}}{%
+  \newcount\N
+  \N=0
+  $\loop\ifnum\N<#2
+    \ifnum\N<#1\bullet\else\circ\fi
+    \advance \N by 1
+  \repeat$}
+
+\NewDocumentCommand{\Ranked}{smmO{5}}{%
+  \begingroup%
+  \ifnum#3<2
+    \fontseries{l}%
+  \else\ifnum\numexpr2*#3\relax<#4\else
+    \fontseries{eb}%
+  \fi\fi\selectfont
+  #2\endgroup\hfill
+  \IfBooleanT{#1}{{\scriptsize\Fa{LevelUp}}\quad}%
+  \Rank{#3}[#4]\par}
+
+\NewDocumentCommand{\Unranked}{m}{%
+  \begingroup%
+  \fontseries{l}\selectfont
+  #1\endgroup\par}
+
+\NewDocumentCommand{\Fa}{m}
+  {\hbox to 1em{\hfill\resizebox{1em}{!}{\csname fa#1\endcsname}\hfill}}
+
+%===[ PAGE GEOMETRY ]===========================================================
+
+% NOTE: cannot be at bottom of preamble because we need \lsstyle for \SectionStrutHeight
+\usepackage[
+  letterspace=90
+]{microtype}
+
+\def\Phi{1.618}
+\newlength{\Pad}\setlength{\Pad}{14.562pt} % \Phi * 9pt
+\newlength{\Row}\setlength{\Row}{1.00in}
+\newlength{\Col}\setlength{\Col}{2.00in}
+\newlength{\SectionStrutHeight}
+\settoheight{\SectionStrutHeight}{\hbox{\SectionStrut}}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  % letterpaper,
+  top=\dimexpr\Row+\Pad+\Phi\Pad\relax,
+  left=\dimexpr0.62\Col\relax,
+  right=\dimexpr0.62\Col\relax,
+  bottom=\dimexpr\Pad\relax,
+  % showframe
+}
+
+%===[ COLORS ]==================================================================
+
+\usepackage{xcolor}
+
+\colorlet{VBar}{black}
+\definecolor{HBar}{Hsb}{272,0.8,0.6}
+\definecolor{Accent}{Hsb}{272,0.8,0.7}
+\definecolor{Muted}{Hsb}{0,0,0.5}
+\definecolor{InverseMuted}{Hsb}{0,0,0.6}
+
+%===[ DRAWING TOOLS ]===========================================================
+
+\usepackage{eso-pic}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+%===[ SIDEBAR ]=================================================================
+
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \fill
+      [HBar]
+      ($(current page.north west)+(0,-\Pad)$)
+      rectangle
+      ($(current page.north east)+(0,-\Row-\Pad)$);
+    \node [
+        font=\fontseries{l}\selectfont\lsstyle,
+        color=white,
+        inner sep=0,
+      ] at (0.5\pdfpagewidth,\pdfpageheight-\Pad-.5\Row)
+      {\resizebox{!}{0.25\Row}{PAOLO \ BRASOLIN}};
+  \end{tikzpicture}}
+
+\AddToShipoutPictureFG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node [
+        draw, white,
+        anchor=south west,
+        inner sep=\Pad,
+        text=white,
+        text width=\pdfpagewidth-2\Pad,
+        fill=black,
+        align=center,
+      ] at ($(current page.south west)+(0,\Pad)$)
+      {
+        \strut
+        %
+        \href{mailto:paolobrasolin@gmail.com}{\Fa{Envelope}}
+        \,paolobrasolin@gmail.com
+        %
+        \qquad
+        %
+        \,\href{https://www.linkedin.com/in/paolobrasolin/}{\Fa{Linkedin}}
+        \,\href{https://github.com/paolobrasolin/}{\Fa{Github}}
+        \,\href{https://twitter.com/paolobrasolin}{\Fa{Twitter}}
+        \,paolobrasolin
+        %
+        \qquad
+        %
+        \Fa{Phone}
+        \,(+39)\ 347\ 6769233
+      };
+  \end{tikzpicture}}
+
+\AddToShipoutPictureFG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node [
+        % draw, white,
+        anchor=north west,
+        inner sep=0,
+        text=white,
+        text width=\Col-2\Pad,
+        % minimum height=\pdfpageheight-\Row-5\Pad,
+      ] at (2\Pad,\pdfpageheight-\Pad-\Row-\Phi\Pad+\SectionStrutHeight)
+      {};
+  \end{tikzpicture}}
+
+%===[ MAIN CONTENT ]============================================================
+
+\usepackage{lipsum}
+
+\begin{document}
+
+\lipsum
+
+\end{document}
